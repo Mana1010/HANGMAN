@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>HANGMAN</title>
+  </head>
+  <body class="w-full h-screen">
+    <div
+      id="main-page"
+      class="flex justify-center items-center w-full h-full flex-col space-y-10 px-4 relative"
+    >
+      <img src="./images/title.png" alt="title" width="500" />
+      <p class="italic text-1.2rem">DON'T LET THE HOSTAGE TO BE KILL</p>
+      <button
+        id="play-button"
+        class="md:w-[300px] w-full py-3 rounded-md border-2 border-slate-900"
+        type="button"
+      >
+        PLAY
+      </button>
+      <footer
+        class="absolute bottom-0 right-0 left-0 h-[100px] flex items-center justify-center"
+      >
+        <h3>
+          DEVELOPED BY: TRISTAN VIC T. CLARITO
+          <span class="font-bold">BSIT-2B</span>
+        </h3>
+      </footer>
+    </div>
+    <div
+      id="game-page"
+      class="hidden w-full h-full items-center flex-col md:flex-row"
+    >
+      <div class="bg-white md:flex-[30%] flex-none">
+        <img
+          id="img-stickers"
+          src="./images/default.png"
+          alt="default"
+          width="600"
+        />
+      </div>
+      <div class="bg-[#292727] w-full h-full flex-[70%] px-5 relative">
+        <header class="flex justify-between py-2">
+          <!-- PERSONAL BEST -->
+          <div>
+            <h4 class="text-[#F7B900] font-semibold">PERSONAL BEST</h4>
+            <div
+              class="flex space-x-2 text-white items-center justify-start text-[1.3rem]"
+            >
+              <span class="flex justify-center items-center"
+                ><ion-icon name="trophy-outline"></ion-icon
+              ></span>
+              <h4 id="best-completed">0</h4>
+            </div>
+            <div class="flex space-x-2 text-white items-center text-[1.3rem]">
+              <span class="flex justify-center items-center"
+                ><ion-icon name="star-outline"></ion-icon
+              ></span>
+              <h4 id="best-score">0</h4>
+            </div>
+          </div>
+          <div
+            id="wrong-toaster"
+            class="relative top-[50px] items-center text-red-500 transition-all duration-100 hidden"
+          >
+            <span class="text-5xl"
+              ><ion-icon name="close-outline"></ion-icon
+            ></span>
+            <h2>WRONG</h2>
+          </div>
+          <div
+            id="no-answer-toaster"
+            class="relative top-[50px] items-center text-yellow-500 transition-all duration-100 hidden"
+          >
+            <span class="text-5xl"
+              ><ion-icon name="alert-outline"></ion-icon
+            ></span>
+            <h2>NO ANSWER</h2>
+          </div>
+          <div
+            id="correct-toaster"
+            class="relative top-[50px] items-center text-green-500 transition-all duration-100 hidden"
+          >
+            <span class="text-5xl"
+              ><ion-icon name="checkmark-outline"></ion-icon
+            ></span>
+            <h2>CORRECT</h2>
+          </div>
+
+          <!-- CURRENT SCORE -->
+          <div>
+            <h4 class="text-white font-semibold">CURRENT SCORE</h4>
+            <div
+              class="flex space-x-2 text-white items-center justify-end text-[1.3rem]"
+            >
+              <h4 id="round" class="round">1/15</h4>
+              <span><ion-icon name="golf-outline"></ion-icon></span>
+            </div>
+            <div
+              class="flex space-x-2 text-white items-center justify-end text-[1.3rem]"
+            >
+              <h4 id="completed" class="completed">0/15</h4>
+              <span><ion-icon name="trophy-outline"></ion-icon></span>
+            </div>
+            <div
+              class="flex space-x-2 text-white items-center justify-end text-[1.3rem]"
+            >
+              <h4 id="score" class="">0</h4>
+              <span><ion-icon name="star-outline"></ion-icon></span>
+            </div>
+          </div>
+        </header>
+        <div
+          id="result-page-failed"
+          class="hidden justify-center items-center flex-col space-y-3"
+        >
+          <img src="./images/failed.png" alt="failed" width="200" />
+          <h1 class="text-[#F7B900] text-3xl">
+            YOU FAILED TO PROTECT THE HOSTAGE
+          </h1>
+          <h3>RECORDS:</h3>
+        </div>
+        <div id="result-page-success" class="hidden">
+          <h1 class="text-red-400 text-3xl">
+            YOU SUCCESS TO PROTECT THE HOSTAGE
+          </h1>
+          <h3>RECORDS:</h3>
+        </div>
+        <div
+          id="answer-and-question-page"
+          class="w-full flex flex-col justify-center items-center space-y-5 py-4"
+        >
+          <h2
+            id="timer"
+            class="text-[#F7B900] font-semibold md:text-5xl text-2xl"
+          >
+            30
+          </h2>
+          <h5 id="question" class="text-white text-2xl text-center"></h5>
+          <div
+            id="shuffled-answer"
+            class="flex items-center gap-2 flex-wrap justify-center"
+          ></div>
+          <div
+            id="input-ans"
+            class="w-full flex items-center justify-center flex-col absolute bottom-[30px] space-y-3"
+          >
+            <input
+              type="text"
+              placeholder="YOUR ANSWER"
+              class="outline-none border-2 border-[#F7B900] w-1/2 py-3 text-white bg-transparent px-2"
+            />
+            <button
+              id="submit-btn"
+              type="submit"
+              class="bg-transparent rounded-md text-white shadow-lg py-2.5 w-full md:w-1/4 border-2 border-[#F7B900]"
+            >
+              SUBMIT
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script
+    type="module"
+    src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+  ></script>
+  <script
+    nomodule
+    src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+  ></script>
+  <script src="script.js"></script>
+</html>
